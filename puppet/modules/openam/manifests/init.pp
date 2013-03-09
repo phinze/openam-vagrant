@@ -1,17 +1,27 @@
 class openam(
+  $server_url = "http://${fqdn}",
+  $deployment_uri = '/openam',
+  $config_root = '/etc/openam/',
+  $amadmin_password = 'adminadmin',
   $port = '80'
 ){
-  $openam_download_location = 'http://download.forgerock.org/downloads/enterprise/openam/openam10/10.1.0/openam_10.1.0.war'
-  $openam_war_filename = 'openam_10.1.0.war'
 
   class { 'tomcat':
     port => $port
   }
 
-  exec { 'download-openam-war':
-    command => "wget ${openam_download_location}",
-    cwd => '/var/lib/tomcat6/webapps/',
-    creates => "/var/lib/tomcat6/webapps/${openam_war_filename}",
-    notify => Class['tomcat']
+  include openam::war
+  include openam::configurator
+  class { 'openam::config':
+    server_url       => $server_url,
+    config_root      => $config_root,
+    amadmin_password => $amadmin_password,
+    deployment_uri   => $deployment_uri
   }
+
+  Class['tomcat'] ->
+    Class['openam::war'] ->
+    Class['openam::configurator'] ->
+    Class['openam::config'] ->
+    Class['openam']
 }

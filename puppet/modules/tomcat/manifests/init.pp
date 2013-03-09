@@ -4,7 +4,7 @@ class tomcat(
   include tomcat::package
 
   class { 'tomcat::config':
-    port => $port,
+    port     => $port,
     authbind => ($port <= 1024)
   }
 

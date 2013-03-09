@@ -15,4 +15,12 @@ class tomcat::config(
     mode    => '0644',
     content => template('tomcat/tomcat6')
   }
+
+  # fix tomcat user homedir permissions
+  file { '/usr/share/tomcat6':
+    ensure => directory,
+    owner  => 'tomcat6',
+    group  => 'tomcat6',
+    mode   => '0755'
+  }
 }
