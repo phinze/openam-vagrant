@@ -6,12 +6,14 @@ class openam(
   $port = '80'
 ){
 
-  class { 'tomcat':
+  class { 'openam::prereqs':
     port => $port
   }
 
+  include openam::download
   include openam::war
   include openam::configurator
+
   class { 'openam::config':
     server_url       => $server_url,
     config_root      => $config_root,
@@ -19,9 +21,15 @@ class openam(
     deployment_uri   => $deployment_uri
   }
 
-  Class['tomcat'] ->
+  class { 'openam::admin_tools':
+    amadmin_password => $amadmin_password
+  }
+
+  Class['openam::prereqs'] ->
+    Class['openam::download'] ->
     Class['openam::war'] ->
     Class['openam::configurator'] ->
     Class['openam::config'] ->
+    Class['openam::admin_tools'] ->
     Class['openam']
 }

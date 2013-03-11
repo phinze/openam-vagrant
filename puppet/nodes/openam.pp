@@ -8,4 +8,11 @@ node 'openam.vagrant.dev' {
   }
 
   include openam
+  openam::circle_of_trust { 'vagrant': }
+  openam::identity_provider { 'vagrant-idp':
+    circle_of_trust        => 'vagrant',
+    entity                 => "http://${fqdn}/openam",
+    signing_certificate    => 'test',
+    encryption_certificate => 'test'
+  }
 }
