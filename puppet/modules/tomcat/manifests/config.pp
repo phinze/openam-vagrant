@@ -17,6 +17,7 @@ class tomcat::config(
   }
 
   # fix tomcat user homedir permissions
+  # openam will not deploy unless it can write here
   file { '/usr/share/tomcat6':
     ensure => directory,
     owner  => 'tomcat6',
