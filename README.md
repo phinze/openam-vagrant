@@ -6,8 +6,8 @@ Get an instance of [OpenAM](http://forgerock.com/what-we-offer/open-identity-sta
 
 Before you start, ensure you have [VirtualBox](https://www.virtualbox.org/wiki/Downloads) and [Vagrant](http://www.vagrantup.com/) installed and working.
 
-1. `git clone https://github.com/phinze/openam-vagrant.git`
-2. `cd openam-vagrant`
+1. `git clone https://github.com/phinze/openam-vagrant.git && cd openam-vagrant`
+2. `cp puppet/nodes/openam.pp{.example,}`
 3. `vagrant up`
 
 That's it! The VM will be created and Puppet will download and configure OpenAM for you.
