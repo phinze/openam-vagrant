@@ -2,6 +2,7 @@ class openam::download {
   $openam_url = 'http://download.forgerock.org/downloads/enterprise/openam/openam10/10.1.0/openam_10.1.0.zip'
 
   exec { 'download-openam':
+    timeout => 0,
     command => "wget ${openam_url}",
     cwd     => '/usr/local/src/',
     creates => '/usr/local/src/openam_10.1.0.zip'
