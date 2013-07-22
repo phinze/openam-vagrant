@@ -1,5 +1,5 @@
 class openam::download {
-  $openam_url = 'http://download.forgerock.org/downloads/enterprise/openam/openam10/10.1.0/openam_10.1.0.zip'
+  $openam_url = 'https://dl.dropboxusercontent.com/u/12210925/dist/openam_10.1.0.zip'
 
   exec { 'download-openam':
     timeout => 0,
