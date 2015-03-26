@@ -2,7 +2,7 @@
 # vi: set ft=ruby :
 
 Vagrant.configure('2') do |config|
-  config.vm.box = 'precise64'
+  config.vm.box = 'hashicorp/precise64'
 
   config.vm.provider :vmware_fusion do |v|
     v.vmx['memsize'] = 2048
@@ -14,7 +14,9 @@ Vagrant.configure('2') do |config|
 
   config.vm.hostname = 'openam.vagrant.dev'
   config.vm.network :private_network, ip: '192.168.33.10'
-  config.landrush.enable
+  if Vagrant.has_plugin?('landrush')
+    config.landrush.enabled = true
+  end
 
   config.vm.provision :puppet do |puppet|
     puppet.manifests_path = "puppet"

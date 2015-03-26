@@ -12,9 +12,9 @@ Before you start, ensure you have [VirtualBox](https://www.virtualbox.org/wiki/D
 
 That's it! The VM will be created and Puppet will download and configure OpenAM for you.
 
-OpenAM will be available on port 8080 of `localhost` by default. I recommend setting up [pow](https://github.com/37signals/pow) or an equivalent to redirect `openam.vagrant.dev` to port 8080.
+OpenAM will come up on port 80 of the VM, which should be available at: http://192.168.33.10
 
-Assuming you have pow set up, that's as simple as `echo 8080 > ~/.pow/openam.vagrant`.
+If you have the [landrush](https://github.com/phinze/landrush) Vagrant plugin installed, it should also be accessible via http://openam.vagrant.dev
 
 ## Configuration
 
